@@ -1,6 +1,6 @@
 # HollowTwitch
 
-Mod forked from https://github.com/Sid-003/HKTwitch/actions
+Mod forked from https://github.com/Sid-003/HKTwitch
 This modification of the mod is made by PatTheHyruler and allows for using multiple Twitch channels' chats simultaneously.
 
 Go to https://twitchapps.com/tmi/ and get your oauth token in the form oauth:token.  
