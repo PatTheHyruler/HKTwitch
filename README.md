@@ -33,7 +33,7 @@ The config should look something like this:
   "TwitchChannel": [
     "twitchchannel 1",
     "twitchchannel 2"
-  ,]
+  ],
   "Prefix": "!",
   "BlacklistedCommands": [],
   "AdminUsers": [],
