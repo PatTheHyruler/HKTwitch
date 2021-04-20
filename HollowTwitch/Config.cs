@@ -15,13 +15,13 @@ namespace HollowTwitch
         public ClientType Client = ClientType.Twitch;
         
         [FormerlySerializedAs("Token")]
-        public string TwitchToken;
+        public List<string> TwitchToken;
 
         [FormerlySerializedAs("Username")]
-        public string TwitchUsername;
+        public List<string> TwitchUsername;
 
         [FormerlySerializedAs("Channel")]
-        public string TwitchChannel;
+        public List<string> TwitchChannel;
 
         public int BilibiliRoomID;
         

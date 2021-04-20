@@ -37,7 +37,7 @@ namespace HollowTwitch.Clients
             _client.Close();
         }
 
-        public void StartReceive()
+        public void StartReceive(object inputindex)
         {
             Connect("127.0.0.1", Port);
         }

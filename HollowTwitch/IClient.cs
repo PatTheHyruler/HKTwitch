@@ -11,6 +11,6 @@ namespace HollowTwitch
 
         event Action<string> ClientErrored;
 
-        void StartReceive();
+        void StartReceive(object index);
     }
 }

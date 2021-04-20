@@ -105,7 +105,7 @@ namespace HollowTwitch.Clients
             return isOk;
         }
 
-        public void StartReceive()
+        public void StartReceive(object inputindex)
         {
             ServicePointManager.ServerCertificateValidationCallback = MyRemoteCertificateValidationCallback;
 

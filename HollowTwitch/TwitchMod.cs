@@ -41,13 +41,18 @@ namespace HollowTwitch
             ObjectLoader.LoadAssets();
 
             ModHooks.Instance.ApplicationQuitHook += OnQuit;
-
-            ReceiveCommands();
+            int index = 0;
+            foreach (string TwitchChannel in Config.TwitchChannel)
+            {
+                ReceiveCommands(index);
+                index++;
+            }
+            
         }
 
         public override List<(string, string)> GetPreloadNames() => ObjectLoader.ObjectList.Values.ToList();
 
-        private void ReceiveCommands()
+        private void ReceiveCommands(int index)
         {
             Processor = new CommandProcessor();
 
@@ -68,7 +73,7 @@ namespace HollowTwitch
 
             _client = Config.Client switch 
             {
-                ClientType.Twitch => new TwitchClient(Config),
+                ClientType.Twitch => new TwitchClient(Config, index),
                 
                 ClientType.Bilibili => new BiliBiliClient(Config),
                 
@@ -81,11 +86,11 @@ namespace HollowTwitch
 
             _client.ClientErrored += s => Log($"An error occured while receiving messages.\nError: {s}");
 
-            _currentThread = new Thread(_client.StartReceive)
+            _currentThread = new Thread(new ParameterizedThreadStart(_client.StartReceive))
             {
                 IsBackground = true
             };
-            _currentThread.Start();
+            _currentThread.Start(index);
 
             GenerateHelpInfo();
 

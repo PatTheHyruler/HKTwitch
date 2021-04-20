@@ -19,14 +19,14 @@ namespace HollowTwitch.Clients
 
         public event Action<string> ClientErrored;
 
-        public TwitchClient(Config config)
+        public TwitchClient(Config config, int index)
         {
             _config = config;
-            ConnectAndAuthenticate(config);
+            ConnectAndAuthenticate(config, index);
             RawPayload += ProcessMessage;
         }
 
-        private void ConnectAndAuthenticate(Config config)
+        private void ConnectAndAuthenticate(Config config, int index)
         {
             _client = new TcpClient("irc.twitch.tv", 6667);
 
@@ -38,21 +38,21 @@ namespace HollowTwitch.Clients
 
             if (!_client.Connected)
             {
-                Reconnect(10000);
+                Reconnect(10000, index);
                 return;
             }
                 
-            SendMessage($"PASS oauth:{config.TwitchToken}");
-            SendMessage($"NICK {config.TwitchUsername}");
-            SendMessage($"JOIN #{config.TwitchChannel}");
+            SendMessage($"PASS oauth:{config.TwitchToken[index]}");
+            SendMessage($"NICK {config.TwitchUsername[index]}");
+            SendMessage($"JOIN #{config.TwitchChannel[index]}");
         }
 
-        private void Reconnect(int delay)
+        private void Reconnect(int delay, int index)
         {
             ClientErrored?.Invoke("Reconnecting........");
             Dispose();
             Thread.Sleep(delay);
-            ConnectAndAuthenticate(_config);
+            ConnectAndAuthenticate(_config, index);
         }
 
         private void ProcessMessage(string message)
@@ -74,7 +74,7 @@ namespace HollowTwitch.Clients
             }
         }
 
-        public void StartReceive()
+        public void StartReceive(object inputindex)
         {
             while (true)
             {
@@ -83,7 +83,7 @@ namespace HollowTwitch.Clients
                     if (!_client.Connected)
                     {
                         Dispose();
-                        ConnectAndAuthenticate(_config);
+                        ConnectAndAuthenticate(_config, 0);
                     }
 
                     string message = _output.ReadLine();
@@ -92,7 +92,8 @@ namespace HollowTwitch.Clients
                 catch (Exception e)
                 {
                     ClientErrored?.Invoke("Error occured trying to read stream: " + e);
-                    Reconnect(5000);
+                    int index = (int)inputindex;
+                    Reconnect(5000, index);
                 }
                
             }

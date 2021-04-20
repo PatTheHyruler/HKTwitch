@@ -1,5 +1,8 @@
 # HollowTwitch
 
+Mod forked from https://github.com/Sid-003/HKTwitch/actions
+This modification of the mod is made by PatTheHyruler and allows for using multiple Twitch channels' chats simultaneously.
+
 Go to https://twitchapps.com/tmi/ and get your oauth token in the form oauth:token.  
 Place your token, username, and channel (Note: the channel and username are all lowercase) within TwitchMod.GlobalSettings.json in your Hollow Knight saves folder.  
 If the file does not exist, run the game with TwitchMod installed and quit the game using the menus to generate it. 
@@ -19,9 +22,18 @@ The config should look something like this:
 {
   "Client": "Twitch",
   "BilibiliRoomID": "your_room_id_goes_here",
-  "TwitchToken": "your_token_goes_here",
-  "TwitchUsername": "twitchchannel",
-  "TwitchChannel": "twitchchannel",
+  "TwitchToken": [
+    "token 1 goes here",
+	"token 2 goes here"
+  ],
+  "TwitchUsername": [
+    "twitchchannel 1",
+	"twitchchannel 2"
+  ],
+  "TwitchChannel": [
+    "twitchchannel 1",
+	"twitchchannel 2"
+  ,]
   "Prefix": "!",
   "BlacklistedCommands": [],
   "AdminUsers": [],
