@@ -23,16 +23,16 @@ The config should look something like this:
   "Client": "Twitch",
   "BilibiliRoomID": "your_room_id_goes_here",
   "TwitchToken": [
-    "token 1 goes here",
-	"token 2 goes here"
+    "token 1",
+    "token 2"
   ],
   "TwitchUsername": [
     "twitchchannel 1",
-	"twitchchannel 2"
+    "twitchchannel 2"
   ],
   "TwitchChannel": [
     "twitchchannel 1",
-	"twitchchannel 2"
+    "twitchchannel 2"
   ,]
   "Prefix": "!",
   "BlacklistedCommands": [],
